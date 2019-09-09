@@ -16,7 +16,8 @@ function password_is_valid(password) {
     }
     return passwordChecker;
 }
-//password_is_valid("ASKh5");
+
+//password_is_valid("ghe5Tooooo");
 
 //three consitions must be met in order for password_is_ok to return "valid password".
 function password_is_ok(password) {
@@ -27,17 +28,18 @@ function password_is_ok(password) {
     let checkLowerCase = /[a-z]/g;
     let checkNumber = /[0-9]/g;
 
+    let testLength = checkLength.test(password);
     let characters = checkChars.test(password);
     let upperCase = checkUpperCase.test(password);
     let lowerCase = checkLowerCase.test(password);
     let numberChecker = checkNumber.test(password);
 
-    if (checkLength && characters)  {  //most essential conditions
+    if (testLength && characters)  {  //most essential conditions
         if (lowerCase || upperCase || numberChecker) {
             console.log("Password is valid");
             return true;
         } else{
-            console.log("Password does not have a lowercase letter or uppercase letter or number.");
+            console.log("Password does not have a lowercase letter, uppercase letter or number.");
             return false;
         }
     }else{
@@ -46,5 +48,5 @@ function password_is_ok(password) {
     }
 }
 
-//console.log(password_is_ok(password));
+console.log(password_is_ok(password));
 
