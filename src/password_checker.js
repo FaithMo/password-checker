@@ -1,7 +1,5 @@
 //PASSWORD CHECKER.
 
-var password;
-
 function password_is_valid(password) {
 
    let valid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
@@ -17,36 +15,27 @@ function password_is_valid(password) {
     return passwordChecker;
 }
 
-//password_is_valid("ghe5Tooooo");
+password_is_valid("222Gghhhhh");
 
 //three consitions must be met in order for password_is_ok to return "valid password".
 function password_is_ok(password) {
+  let checkChars = /./;
+  let checkLength = /(?=.{8,})/;
+  let checkUpperCase = /[A-Z]/; 
+  let checkLowerCase = /[a-z]/; 
+  let checkNumber = /[0-9]/; 
 
-    let checkChars = /./g; //Avoids empty spaces in password
-    let checkLength = /(?=.{8,})/g; 
-    let checkUpperCase = /[A-Z]/g;
-    let checkLowerCase = /[a-z]/g;
-    let checkNumber = /[0-9]/g;
+  let chars = checkChars.test(password);
+  let length = checkLength.test(password);
+  let upperCase = checkUpperCase.test(password);
+  let lowerCase = checkLowerCase.test(password);
+  let number = checkNumber.test(password);
 
-    let testLength = checkLength.test(password);
-    let characters = checkChars.test(password);
-    let upperCase = checkUpperCase.test(password);
-    let lowerCase = checkLowerCase.test(password);
-    let numberChecker = checkNumber.test(password);
-
-    if (testLength && characters)  {  //most essential conditions
-        if (lowerCase || upperCase || numberChecker) {
-            console.log("Password is valid");
-            return true;
-        } else{
-            console.log("Password does not have a lowercase letter, uppercase letter or number.");
-            return false;
-        }
-    }else{
-        console.log("Password is empty");
-        return false;
-    }
+  if ( length && chars && (upperCase || lowerCase || number)) {
+    console.log("true");
+  } else {
+    console.log("false");
+  }
 }
 
-console.log(password_is_ok(password));
-
+password_is_ok("hghhhhhhhhhhh");
