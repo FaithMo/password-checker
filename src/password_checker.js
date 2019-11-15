@@ -32,10 +32,12 @@ function password_is_ok(password) {
   let number = checkNumber.test(password);
 
   if ( length && chars && (upperCase || lowerCase || number)) {
-    console.log("true");
+    console.log("Password okay!");
+    return true;
   } else {
-    console.log("false");
+    console.log("Password is not okay!");
+    return false;
   }
 }
 
-password_is_ok("hghhhhhhhhhhh");
+password_is_ok("222Gghhhhh");
