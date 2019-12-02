@@ -41,3 +41,7 @@ function password_is_ok(password) {
 }
 
 password_is_ok("222Gghhhhh");
+
+
+module.exports =  password_is_valid;
+module.exports = password_is_ok;
