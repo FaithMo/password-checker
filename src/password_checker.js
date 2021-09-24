@@ -1,47 +1,70 @@
-//PASSWORD CHECKER.
+const { whitespaceTest } = require("./objects");
+let data = require("./objects");
 
-function password_is_valid(password) {
-
-   let valid = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])[0-9a-zA-Z]{8,}$/;
-
-   let passwordChecker = valid.test(password);
-
-    try {
-        if (passwordChecker == false)
-        throw "Password must have more than 8 characters, at least one lowercase letter, one uppercase letter and one digit";
-    } catch (error) {
-        console.log("Error: " + error);
-    }
-    return passwordChecker;
+const testCases = (testCase, password) => {
+  return testCase.test(password);
 }
 
-password_is_valid("222Gghhhhh");
-
-//three consitions must be met in order for password_is_ok to return "valid password".
-function password_is_ok(password) {
-  let checkChars = /./;
-  let checkLength = /(?=.{8,})/;
-  let checkUpperCase = /[A-Z]/; 
-  let checkLowerCase = /[a-z]/; 
-  let checkNumber = /[0-9]/; 
-
-  let chars = checkChars.test(password);
-  let length = checkLength.test(password);
-  let upperCase = checkUpperCase.test(password);
-  let lowerCase = checkLowerCase.test(password);
-  let number = checkNumber.test(password);
-
-  if ( length && chars && (upperCase || lowerCase || number)) {
-    console.log("Password okay!");
-    return true;
+const passwordIsValid = (password) => {
+  let passwordChecker;
+  if (password == undefined || password == "") {
+    passwordChecker = false;
+    throw data.existError;
   } else {
-    console.log("Password is not okay!");
-    return false;
+    passwordChecker = false;
+    if (testCases(data.shortLengthTest, password) === false) {
+      passwordChecker = false;
+      throw data.shortLengthError;
+    } else if (testCases(data.lowerCaseTest, password) === false) {
+      passwordChecker = false;
+      throw data.lowerCaseError;
+    } else if (testCases(data.upperCaseTest, password) === false) {
+      passwordChecker = false;
+      throw data.upperCaseError;
+    } else if (testCases(data.digitTest, password) === false) {
+      passwordChecker = false;
+      throw data.digitError;
+    } else if (testCases(data.specialCharTest, password) === false) {
+      passwordChecker = false;
+      throw data.specialCharError;
+    } else if (testCases(data.whitespaceTest, password) === true) {
+      passwordChecker = false;
+      throw data.whitespaceError;
+    } else {
+      passwordChecker = true;
+    }
   }
+  return passwordChecker;
 }
+const passwordStrength = (password) => {
+  let counter = 0,
+    passwordExists,
+    whitespace;
+  if (password !== undefined || password !== "") {
+    passwordExists == true;
+  }
+  if (/\s/.test(password) == false) {
+    whitespace = true;
+  }
 
-password_is_ok("222Gghhhhh");
-
-
-module.exports =  password_is_valid;
-module.exports = password_is_ok;
+  for (let i = 7; i < Object.values(data).length; i++) {
+    if (testCases(Object.values(data)[i], password) === true) {
+      counter = counter + 1;
+      if (testCases(whitespaceTest, password) === false) {
+        counter = counter + 1;
+      }
+    }
+  }
+  if (counter >= 6) {
+    return "strong";
+  }
+  if (counter >= 4) {
+    return "medium";
+  }
+  if (counter == 3) {
+    return "weak";
+  }
+  if (password == undefined || password == "") {
+    return "invalid";
+  }
+};
