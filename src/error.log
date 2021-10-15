@@ -1,0 +1,13 @@
+error: password should be longer than than 8 characters
+error: password should be longer than than 8 characters
+error: password should be longer than than 8 characters
+error: password should exist
+error: password should exist
+error: password should have at least one special character
+{"level":"error","message":"password should have at least one special character"}
+{"level":"error","message":"password should have at least one special character"}
+{"level":"error","message":"password should have at least one special character"}
+{"level":"error","message":"password should have at least one uppercase letter"}
+{"level":"error","message":"password should be longer than than 8 characters"}
+{"level":"error","message":"password should have at least one lowercase letter"}
+{"level":"error","message":"password should have at least one special character"}

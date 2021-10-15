@@ -1,40 +1,52 @@
-let  password_is_valid = require('../src/password_checker');
-let password_is_ok = require('../src/password_checker');
+const {passwordIsValid, passwordStrength} = require("../src/password_checker");
+const data = require("../src/utils/data");
 
-describe("Validate password", function(){
-
-    it("should check whether a password has 8 characters", function(){
-
-        expect(password_is_valid("ghee")).toBe(false);
-        expect(password_is_valid("ghe8gheE")).toBe(true);
-
-    });
-
-    it("should check whether a password has at least 1 uppercase letter", function(){
-
-        expect(password_is_valid("ghe8gheE")).toBe(true);
-
-    });
-
-    it("should check whether a password has  at least 1 lowercase", function(){
-
-        expect(password_is_valid("ghe8gheE")).toBe(true);
-    });
-
-    it("should check whether a password has at least 1 number", function(){
-
-        expect(password_is_valid("ghe8gheE")).toBe(true);
-    });
-
+describe("Logging", function () {
+  const logger = require("../src/utils/error");
+  it("level should be an error", () => {
+    expect(logger.level).toBe("error")
+  });
+  it("should check for the correct filename", () => {
+    expect(logger.transports[1].filename).toBe('error.log')
+  });
 });
 
-describe("Checks for three conditions", function(){
-    
-    it("should check if password passes three conditions.", function(){
-
-        expect(password_is_ok("ghe8gheE")).toBe(true);
-        expect(password_is_ok("")).toBe(false);
-        expect(password_is_ok("1gh")).toBe(false);
-        
+describe("password is valid", () => {
+  it("should check whether a password has at least 1 special character", function () {
+    expect(() => {
+      passwordIsValid("ghe8gheE").toThrow(new Error(data.specialCharError))
     });
-})
+  });
+  it("should check whether a password has at least 1 uppercase letter", function () {
+    expect(() => {
+      passwordIsValid("ghe8ghe%i").toThrow(new Error(data.upperCaseError))
+    });
+  });
+  it("should check whether a password has at least 1 lowercase letter", function () {
+    expect(() => {
+      passwordIsValid("GHE%E8GHE").toThrow(new Error(data.lowerCaseError))
+    });
+  });
+  it("should check whether a password has at least 1 digit", function () {
+    expect(() => {
+      passwordIsValid("ghe%gheE").toThrow(new Error(data.digitError))
+    });
+  });
+});
+
+describe("password strength", () => {
+  it("return invalid if password is empty", () => {
+    expect(passwordStrength("")).toBe("invalid")
+  });
+  it("return invalid if password is undefined", () => {
+    expect(passwordStrength("")).toBe("invalid")
+  });
+  it("should return weak if only 3 conditions were met", () => {
+    expect(passwordStrength("My")).toBe("weak")
+  });it("should return medium if 4 or more conditions were met", () => {
+    expect(passwordStrength("My0")).toBe("medium")
+  });it("should return strong if 6 or more conditions were met", () => {
+    expect(passwordStrength("My0$1nasme")).toBe("strong")
+  });
+});
+

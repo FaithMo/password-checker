@@ -15,5 +15,10 @@
   "bugs": {
     "url": "https://github.com/FaithMo/password-checker/issues"
   },
-  "homepage": "https://github.com/FaithMo/password-checker#readme"
+  "homepage": "https://github.com/FaithMo/password-checker#readme",
+  "dependencies": {
+    "jasmine": "^3.10.0",
+    "nodemon": "^2.0.13",
+    "winston": "^3.3.3"
+  }
 }
