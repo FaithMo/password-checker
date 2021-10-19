@@ -9,7 +9,7 @@ const testCases = (testCase, password) => {
 };
 
 const passwordIsValid = (password) => {
-  if (password == undefinedPassword || password == emptyPassword) {
+  if (password === undefinedPassword || password === emptyPassword) {
     logger.error(data.existError);
     return false
   } else {
@@ -41,7 +41,7 @@ const passwordStrength = (password) => {
 
   if (password === emptyPassword || password === undefined){
       return "invalid"
-  }else if(data.whitespaceTest.test(password) == false) {
+  }else if(data.whitespaceTest.test(password) === false) {
     counter++;
   }
   for (let i = 9; i < Object.values(data).length; i++) {
