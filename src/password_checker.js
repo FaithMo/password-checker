@@ -2,17 +2,16 @@ const data = require("./utils/data")
 const logger = require("./utils/error");
 const strength = require("./utils/strength")
 
-const undefinedPassword = undefined,
-  emptyPassword = "",
-  passwordOk = "User password is ok",
-  passwordNotOk = "User password is not ok"
-let isPasswordOk
-
 const testCases = (testCase, password) => {
   return testCase.test(password);
 };
 
 const passwordIsValid = (password) => {
+  const passwordOk = "User password is ok",
+  passwordNotOk = "User password is not ok",
+  undefinedPassword = undefined,
+  emptyPassword = ""
+  let isPasswordOk
   if (password === undefinedPassword || password === emptyPassword) {
     logger.error(data.existError)
     isPasswordOk = passwordNotOk
@@ -49,6 +48,7 @@ const passwordIsValid = (password) => {
   return isPasswordOk
 };
 const passwordStrength = (password) => {
+  const emptyPassword = ""
   let counter = 0, passStrength
 
   if (password === emptyPassword || password === undefined){

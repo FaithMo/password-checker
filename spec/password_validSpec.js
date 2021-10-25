@@ -2,16 +2,6 @@ const {passwordIsValid, passwordStrength} = require("../src/password_checker");
 const strength = require("../src/utils/strength")
 
 
-// describe("Logging", () => {
-//   const logger = require("../src/utils/error");
-//   it("level should be an error", () => {
-//     expect(logger.level).toBe("error")
-//   });
-//   it("should check for the correct filename", () => {
-//     expect(logger.transports[1].filename).toBe('error.log')
-//   });
-// });
-
 describe("password is valid", () => {
   it("should check whether password exists or not", () => {
     expect(() => {
@@ -40,31 +30,31 @@ describe("password is valid", () => {
   });
 });
 
-// describe("password strength", () => {
-//   it("return invalid if password is empty", () => {
-//     expect(() => {
-//       passwordStrength("").toThrow( new Error("invalid"))
-//     })
-//   });
-//   it("return invalid if password is undefined", () => {
-//     expect(() => {
-//       passwordStrength().toThrow(new Error("invalid"))
-//     })
-//   });
-//   it("should return weak if only 3 conditions were met", () => {
-//     expect(() => {
-//       passwordStrength("My").toThrow(new Error("weak"))
-//     })
-//   });
-//   it("should return medium if 4 or more conditions were met", () => {
-//     expect(()=> {
-//       passwordStrength("My0").toThrow(new Error("medium"))
-//     })
-//   });
-//   it("should return strong if 6 or more conditions were met", () => {
-//     expect(()=> {
-//       passwordStrength("My0$1nasme").toThrow(new Error("strong"))
-//     })
-//   });
-// });
+describe("password strength", () => {
+  it("return invalid if password is empty", () => {
+    expect(() => {
+      passwordStrength("").toThrow( new Error("invalid"))
+    })
+  });
+  it("return invalid if password is undefined", () => {
+    expect(() => {
+      passwordStrength().toThrow(new Error("invalid"))
+    })
+  });
+  it("should return weak if only 3 conditions were met", () => {
+    expect(() => {
+      passwordStrength("My").toThrow(new Error("weak"))
+    })
+  });
+  it("should return medium if 4 or more conditions were met", () => {
+    expect(()=> {
+      passwordStrength("My0").toThrow(new Error("medium"))
+    })
+  });
+  it("should return strong if 6 or more conditions were met", () => {
+    expect(()=> {
+      passwordStrength("My0$1nasme").toThrow(new Error("strong"))
+    })
+  });
+});
 
