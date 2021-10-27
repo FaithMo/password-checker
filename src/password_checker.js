@@ -1,43 +1,57 @@
-const data = require("./utils/data");
+const data = require("./utils/data")
 const logger = require("./utils/error");
+const strength = require("./utils/strength")
 
 const testCases = (testCase, password) => {
   return testCase.test(password);
 };
 
 const passwordIsValid = (password) => {
+  const passwordOk = "User password is ok"
+  const passwordNotOk = "User password is not ok"
+  let isPasswordOk
+
   if (password === undefined || password === "") {
-    logger.error(data.existError);
-    return false
+    logger.error(data.existError)
+    isPasswordOk = passwordNotOk
+    throw Error(data.existError)
   } else {
     if (testCases(data.shortLengthTest, password) === false) {
       logger.error(data.shortLengthError)
-      return false
+      isPasswordOk = passwordNotOk
+    throw Error(data.shortLengthError)
     } else if (testCases(data.lowerCaseTest, password) === false) {
       logger.error(data.lowerCaseError)
-      return false
+      isPasswordOk = passwordNotOk
+    throw Error(data.lowerCaseError)
     } else if (testCases(data.upperCaseTest, password) === false) {
       logger.error(data.upperCaseError)
-      return false
+      isPasswordOk = passwordNotOk
+    throw Error(data.upperCaseError)
     } else if (testCases(data.digitTest, password) === false) {
       logger.error(data.digitError)
-      return false
+      isPasswordOk = passwordNotOk
+      throw Error(data.digitError)
     } else if (testCases(data.specialCharTest, password) === false) {
       logger.error(data.specialCharError)
-      return false
+      isPasswordOk = passwordNotOk
+    throw Error(data.specialCharError)
     } else if (testCases(data.whitespaceTest, password) === true) {
       logger.error(data.whitespaceError)
-      return false
+      isPasswordOk = passwordNotOk
+    throw Error(data.whitespaceError)
     } else {
-      return true
+      isPasswordOk = passwordOk
     }
   }
+  return isPasswordOk
 };
 const passwordStrength = (password) => {
-  let counter = 0;
+  let counter = 0, passStrength
 
-  if (password === "" || password === undefined){
-      return "invalid"
+  if (password === undefined || password === ""){
+    passStrength = strength.invalid
+    logger.error(strength.invalid)
   }else if(data.whitespaceTest.test(password) === false) {
     counter++;
   }
@@ -47,13 +61,18 @@ const passwordStrength = (password) => {
     }
   }
   if (counter >= 6) {
-    return "strong";
+    logger.error(strength.strong)
+    passStrength = strength.strong
   }
-  if (counter >= 4) {
-    return "medium";
+  if (counter === 4 || counter === 5) {
+    logger.error(strength.medium)
+    passStrength = strength.medium
   }
-  if (counter == 3) {
-    return "weak";
+  if (counter === 3) {
+    logger.error(strength.weak)
+    passStrength = strength.weak
   }
 };
+
+
 module.exports = {passwordIsValid, passwordStrength}

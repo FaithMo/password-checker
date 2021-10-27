@@ -1,4 +1,4 @@
-let data = {
+const data = {
     existError: "password should exist",
     shortLengthError: "password should be longer than than 8 characters",
     lowerCaseError: "password should have at least one lowercase letter",
