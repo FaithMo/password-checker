@@ -1,15 +1,12 @@
 const data = require("./utils/data");
 const logger = require("./utils/error");
 
-const undefinedPassword = undefined,
-  emptyPassword = "";
-
 const testCases = (testCase, password) => {
   return testCase.test(password);
 };
 
 const passwordIsValid = (password) => {
-  if (password === undefinedPassword || password === emptyPassword) {
+  if (password === undefined || password === "") {
     logger.error(data.existError);
     return false
   } else {
@@ -39,7 +36,7 @@ const passwordIsValid = (password) => {
 const passwordStrength = (password) => {
   let counter = 0;
 
-  if (password === emptyPassword || password === undefined){
+  if (password === "" || password === undefined){
       return "invalid"
   }else if(data.whitespaceTest.test(password) === false) {
     counter++;
